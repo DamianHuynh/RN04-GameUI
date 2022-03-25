@@ -4,8 +4,12 @@ import {BackgroundView, Text, Header} from '../../components';
 import axios from 'axios';
 import GameItem from './components/GameItem';
 import {stackName} from '../../configs/navigationConstants';
+import {mapLocalHostToIP} from '../../utils';
+import {connect} from 'react-redux';
+import {setListGame} from '../../redux/actions/gameAction';
+import {requestListGame} from '../../redux/thunk/gameActionThunk';
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   state = {
     loading: true,
     listGame: [],
@@ -25,13 +29,11 @@ export default class HomeScreen extends Component {
   };
 
   componentDidMount() {
-    axios({method: 'GET', url: 'http://localhost:3000/games'})
-      .then(res => this.setState({listGame: res.data, loading: false}))
-      .catch(err => console.log(err));
+    this.props.dispatch(requestListGame());
   }
 
   render() {
-    const {listGame, loading} = this.state;
+    const {listGame} = this.props;
     return (
       <BackgroundView>
         <Header
@@ -54,6 +56,16 @@ export default class HomeScreen extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  setListGame: listGame => dispatch(setListGame(listGame)),
+});
+
+const mapStateToProps = state => ({
+  listGame: state.gameReducer.listGame,
+});
+
+export default connect(mapStateToProps)(HomeScreen);
 
 const styles = StyleSheet.create({
   headerContainer: {
