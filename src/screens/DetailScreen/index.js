@@ -62,7 +62,6 @@ class DetailScreen extends Component {
     this.props.dispatch(requestDetailGame(this.props.route.params.id));
   }
   render() {
-    console.log(this.props);
     const {
       game: {title, subTitle, icon, preview, age, description},
     } = this.props;

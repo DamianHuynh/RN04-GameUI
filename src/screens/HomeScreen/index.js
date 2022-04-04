@@ -24,10 +24,6 @@ class HomeScreen extends Component {
     </View>
   );
 
-  onPressGameItem = id => {
-    this.props.navigation.navigate(stackName.detailStack, {id});
-  };
-
   componentDidMount() {
     this.props.dispatch(requestListGame());
   }
@@ -42,12 +38,7 @@ class HomeScreen extends Component {
         />
         <FlatList
           data={listGame}
-          renderItem={({item}) => (
-            <GameItem
-              game={item}
-              onPress={() => this.onPressGameItem(item.id)}
-            />
-          )}
+          renderItem={({item}) => <GameItem game={item} id={item.id} />}
           ItemSeparatorComponent={() => <View style={{height: 60}} />}
           contentContainerStyle={{paddingBottom: 60}}
           showsVerticalScrollIndicator={false}

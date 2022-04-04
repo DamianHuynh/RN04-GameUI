@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Screen from '../../screens';
+import ScreenHook from '../../screensHook';
 import {tabName} from '../../configs/navigationConstants';
 import {COLORS} from '../../themes';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
@@ -39,7 +40,7 @@ export default class HomeTab extends Component {
       <BottomTab.Navigator screenOptions={screenOptions}>
         <BottomTab.Screen
           name={tabName.homeTab}
-          component={Screen.HomeScreen}
+          component={ScreenHook.HomeScreenHook}
         />
         <BottomTab.Screen
           name={tabName.streamTab}

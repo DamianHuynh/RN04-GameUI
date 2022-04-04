@@ -14,6 +14,7 @@ export default (state = initialState, {type, payload}) => {
     case REQUEST_LIST_GAME_SUCCESS:
       return {...state, listGame: mapLocalHostToIP(payload)};
     case REQUEST_DETAIL_GAME_SUCCESS:
+      console.log(payload);
       return {...state, game: mapLocalHostToIP(payload)};
     default:
       return state;
